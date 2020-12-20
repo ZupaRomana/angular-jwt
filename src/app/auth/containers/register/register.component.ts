@@ -5,26 +5,26 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
-  loginForm: FormGroup;
+  registerForm: FormGroup;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       username: [''],
       password: ['']
     });
   }
 
-  get form() { return this.loginForm.controls; }
+  get form() { return this.registerForm.controls; }
 
-  login() {
-    this.authService.login(
+  register() {
+    this.authService.register(
       {
         username: this.form.username.value,
         password: this.form.password.value
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     )
     .subscribe(success => {
       if (success) {
-        this.router.navigate(['/customers']);
+        this.router.navigate(['/login']);
       }
     });
   }

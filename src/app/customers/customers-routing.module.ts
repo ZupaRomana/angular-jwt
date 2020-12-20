@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RandomNumberComponent } from './containers/random-number/random-number.component';
+import { CustomersComponent } from './containers/customers/customers.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: RandomNumberComponent,
+    component: CustomersComponent,
   }
 ];
 
@@ -16,4 +16,4 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: []
 })
-export class RandomRoutingModule { }
+export class CustomersRoutingModule { }
