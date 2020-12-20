@@ -1,5 +1,7 @@
 # JWT Authorization and Token Refresh - Angular Academy
 
+Cloned and modified for teaching purposes. All rights belongs to awesome [bartosz-io](https://github.com/bartosz-io)
+
 Angular part of video lesson:
 
 [JWT Authorization and Token Refresh](https://www.youtube.com/watch?v=F1GUjHPpCLA)
