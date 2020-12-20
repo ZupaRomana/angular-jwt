@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/containers/login/login.component';
 import { RegisterComponent } from './auth/containers/register/register.component';
 import { AuthGuard } from './auth/guards/auth.guard';
-import { RandomGuard } from './auth/guards/random.guard';
+import { CustomersGuard } from './auth/guards/customers.guard';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -20,8 +20,8 @@ const routes: Routes = [
   {
     path: 'customers',
     loadChildren: './customers/customers.module#CustomersModule',
-    canActivate: [RandomGuard],
-    canLoad: [RandomGuard]
+    canActivate: [CustomersGuard],
+    canLoad: [CustomersGuard]
   }
 ];
 

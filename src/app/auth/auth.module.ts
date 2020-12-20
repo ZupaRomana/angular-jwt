@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
-import { RandomGuard } from './guards/random.guard';
+import { CustomersGuard } from './guards/customers.guard';
 import { TokenInterceptor } from './token.interceptor';
 import {RegisterComponent} from './containers/register/register.component';
 
@@ -16,7 +16,7 @@ import {RegisterComponent} from './containers/register/register.component';
   providers: [
     AuthGuard,
     AuthService,
-    RandomGuard,
+    CustomersGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
