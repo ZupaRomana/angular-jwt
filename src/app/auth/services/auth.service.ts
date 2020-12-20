@@ -28,7 +28,7 @@ export class AuthService {
   login(user: { username: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${environment.apiUrl}/login`, user)
       .pipe(
-        tap((data: LoginData) => this.doLoginUser(user.username, data.jwtToken)),
+        tap((data: LoginData) => this.doLoginUser(data.username, data.jwtToken)),
         mapTo(true),
         catchError(error => {
           alert(error.error);
@@ -41,6 +41,7 @@ export class AuthService {
       tap(() => this.doLogoutUser()),
       mapTo(true),
       catchError(error => {
+        this.doLogoutUser();
         alert(error.error);
         return of(false);
       }));
@@ -56,7 +57,7 @@ export class AuthService {
 
   private doLoginUser(username: string, token: string) {
     this.loggedUser = username;
-    this.storeTokens(token);
+    this.storeToken(token);
   }
 
   private doLogoutUser() {
@@ -64,7 +65,7 @@ export class AuthService {
     this.removeToken();
   }
 
-  private storeTokens(token: string) {
+  private storeToken(token: string) {
     localStorage.setItem(this.JWT_TOKEN, token);
   }
 
