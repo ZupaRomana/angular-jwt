@@ -11,16 +11,17 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (this.authService.getJwtToken()) {
-      request = this.addToken(request, this.authService.getJwtToken());
+      request = this.addToken(request, this.authService.getJwtToken(), this.authService.getUserID());
     }
 
     return next.handle(request);
   }
 
-  private addToken(request: HttpRequest<any>, token: string) {
+  private addToken(request: HttpRequest<any>, token: string, userID: number) {
     return request.clone({
       setHeaders: {
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
+        'UserID': `${userID}`,
       }
     });
   }

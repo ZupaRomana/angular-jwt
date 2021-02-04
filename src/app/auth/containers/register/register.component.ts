@@ -8,18 +8,14 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  registerForm: FormGroup;
+  registerForm = this.formBuilder.group({
+    username: [''],
+    password: ['']
+  });
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router) { }
-
-  ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      username: [''],
-      password: ['']
-    });
-  }
 
   get form() { return this.registerForm.controls; }
 

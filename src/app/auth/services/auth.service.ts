@@ -11,7 +11,9 @@ import {LoginData} from '../models/login-data';
 export class AuthService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
+  private readonly USER_ID = 'USER_ID';
   private loggedUser: string;
+  private userID: number;
 
   constructor(private http: HttpClient) {}
 
@@ -28,7 +30,7 @@ export class AuthService {
   login(user: { username: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${environment.apiUrl}/login`, user)
       .pipe(
-        tap((data: LoginData) => this.doLoginUser(data.username, data.jwtToken)),
+        tap((data: LoginData) => this.doLoginUser(data.username, data.jwtToken, data.userId)),
         mapTo(true),
         catchError(error => {
           alert(error.error);
@@ -55,14 +57,16 @@ export class AuthService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  private doLoginUser(username: string, token: string) {
+  private doLoginUser(username: string, token: string, userID: number) {
     this.loggedUser = username;
+    this.storeUserID(userID);
     this.storeToken(token);
   }
 
   private doLogoutUser() {
     this.loggedUser = null;
     this.removeToken();
+    this.removeUserID();
   }
 
   private storeToken(token: string) {
@@ -71,5 +75,17 @@ export class AuthService {
 
   private removeToken() {
     localStorage.removeItem(this.JWT_TOKEN);
+  }
+
+  getUserID() {
+    return +localStorage.getItem(this.USER_ID);
+  }
+
+  private storeUserID(userID: number) {
+    localStorage.setItem(this.USER_ID, `${userID}`);
+  }
+
+  private removeUserID() {
+    localStorage.removeItem(this.USER_ID);
   }
 }
